@@ -1,2 +1,25 @@
 # CyberSafety-for-kids
-A comprehensive repository focused on creating awareness, resources, and tools for digital safety among school children. Contains educational materials, guidelines for safe internet use, lesson plans for teachers, and practical activities for students and parents to promote cyber safety awareness and responsible digital citizenship.
+
+## Community Project by MVGR College for School Children
+
+This is a **community project led by MVGR College** specifically designed for **school children** to promote digital safety awareness and responsible digital citizenship.
+
+## About This Project
+
+A comprehensive repository focused on creating awareness, resources, and tools for digital safety among school children. This educational initiative by MVGR College contains:
+
+- Educational materials tailored for young learners
+- Guidelines for safe internet use
+- Interactive lesson plans for teachers
+- Practical activities for students and parents
+- Community-driven resources to promote cyber safety awareness
+
+## Target Audience
+
+- **Primary Target**: School children and students
+- **Secondary**: Teachers, parents, and educational community
+- **Initiative**: Community project by MVGR College
+
+## Mission
+
+To build a safer digital environment for school children through education, awareness, and community engagement led by MVGR College's commitment to digital literacy and cyber safety.
