@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Safety Quiz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header-outer {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    header {
+      background-color: #0066cc;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-radius: 20px;
+      border: 4px solid #005bb5;
+      box-sizing: border-box;
+      min-height: 60px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 12px 8px 0 8px;
+      pointer-events: auto;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin: 0 5px;
+      background: white;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .header-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a:not(.nav-btn) {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: color 0.2s, background-color 0.2s;
+      border-radius: 999px;
+    }
+
+    nav a:not(.nav-btn):hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+    }
+
+    .nav-btn {
+      background: white;
+      color: #0066cc !important;
+      border-radius: 999px;
+      padding: 8px 28px;
+      margin: 0 2px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      border: none;
+      outline: none;
+      display: inline-block;
+    }
+    .nav-btn.active {
+      background: white;
+      color: #0066cc !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .nav-btn:hover, .nav-btn:focus {
+      background: #e6f0fa;
+      color: #003366 !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      padding: 160px 20px 20px 20px;
+      max-width: 800px;
+      margin: 0 auto 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .quiz-content {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .question-nav {
+      width: 280px;
+      background: linear-gradient(120deg, #e0f7fa 0%, #f0f8ff 100%);
+      border: 3px solid #0066cc;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      position: fixed;
+      top: 180px;
+      right: 15px;
+      max-height: 65vh;
+      overflow-y: auto;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .question-nav h3 {
+      color: #003366;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .nav-question {
+      width: 45px;
+      height: 45px;
+      border: 2px solid #0066cc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-question:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .nav-question.current {
+      background: #0066cc;
+      color: white;
+      border-color: #003366;
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.3);
+    }
+
+    .nav-question.answered {
+      background: #28a745;
+      color: white;
+      border-color: #1e7e34;
+    }
+
+    .nav-question.visited {
+      background: #dc3545;
+      color: white;
+      border-color: #c82333;
+    }
+
+    .nav-question.flagged {
+      background: #6f42c1;
+      color: white;
+      border-color: #5a32a3;
+    }
+
+    .nav-question.flagged::after {
+      content: '🚩';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      font-size: 12px;
+    }
+
+    .nav-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-btn-small {
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .nav-btn-small:hover {
+      background: #003366;
+    }
+
+    .nav-btn-small:disabled {
+      background: #b3d1f7;
+      cursor: not-allowed;
+    }
+
+    .question {
+      background: linear-gradient(120deg, #e0f7fa 0%, #f0f8ff 100%);
+      border: 3px solid #0066cc;
+      padding: 30px 35px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      text-align: left;
+      width: 100%;
+      max-width: 100%;
+      transition: box-shadow 0.2s, border 0.2s;
+      position: relative;
+      animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .progress-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0066cc;
+      margin-bottom: 24px;
+      margin-top: -24px;
+    }
+    .progress-indicator img {
+      width: 32px;
+      height: 32px;
+    }
+    .feedback {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 15px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .feedback.correct {
+      color: #28a745;
+    }
+    .feedback.incorrect {
+      color: #dc3545;
+    }
+    .feedback .icon {
+      width: 28px;
+      height: 28px;
+      vertical-align: middle;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .quiz-btn {
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 38px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-decoration: none !important;
+      letter-spacing: 0.5px;
+    }
+    .quiz-btn:disabled {
+      background: #b3d1f7;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .quiz-btn:hover:not(:disabled) {
+      background: #003366;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.13);
+    }
+    .result {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #e0f7fa 0%, #f0f8ff 100%);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      color: #003366;
+      border: 3px solid #0066cc;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    .pass {
+      color: #28a745;
+    }
+
+    .fail {
+      color: #dc3545;
+    }
+
+    footer {
+      background-color: #0066cc;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        padding: 150px 15px 20px 15px;
+        max-width: 100%;
+      }
+      .question-nav {
+        width: 260px;
+        right: 10px;
+        top: 160px;
+        padding: 15px;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 5px;
+      }
+      .nav-question {
+        width: 40px;
+        height: 40px;
+        font-size: 0.85rem;
+      }
+      .question {
+        padding: 25px 20px;
+        margin-bottom: 18px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-outer {
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 2vw;
+        border-radius: 14px;
+        min-height: 70px;
+        gap: 12px;
+        margin: 8px 2vw 0 2vw;
+      }
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 8px;
+      }
+      .header-title {
+        font-size: 1rem;
+      }
+      main {
+        padding: 140px 5vw 20px 5vw;
+        max-width: 100%;
+      }
+      .question-nav {
+        width: 100%;
+        position: fixed;
+        top: 140px;
+        right: 0;
+        left: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        max-height: 200px;
+        padding: 15px;
+        z-index: 99;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 5px;
+      }
+      .nav-question {
+        width: 40px;
+        height: 40px;
+        font-size: 0.85rem;
+      }
+      .question {
+        padding: 25px 20px;
+        margin-bottom: 15px;
+        border-radius: 16px;
+        margin-top: 220px;
+      }
+      .nav-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .nav-btn-small {
+        flex: 1;
+        min-width: 120px;
+        font-size: 0.8rem;
+        padding: 6px 8px;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        margin: 4px 1vw 0 1vw;
+        min-height: 60px;
+        padding: 8px 1vw;
+      }
+      .header-title {
+        font-size: 0.9rem;
+      }
+      .header-logo {
+        width: 36px;
+        height: 36px;
+      }
+      .nav-btn {
+        font-size: 0.9rem;
+        padding: 6px 14px;
+      }
+      main {
+        padding: 120px 2vw 10px 2vw;
+        max-width: 100%;
+      }
+      .question-nav {
+        top: 120px;
+        max-height: 180px;
+        padding: 12px;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+      }
+      .nav-question {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+      }
+      .question {
+        padding: 20px 15px;
+        margin-bottom: 10px;
+        border-radius: 12px;
+        margin-top: 200px;
+      }
+      .nav-controls {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .nav-btn-small {
+        font-size: 0.75rem;
+        padding: 5px 6px;
+        min-width: auto;
+      }
+    }
+
+    .certificate-link {
+      display: inline-block;
+      margin-top: 24px;
+      text-decoration: none !important;
+    }
+
+    /* Certificate Modal Styles */
+    #certificateModal {
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+    }
+    #certificateModal .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+      max-width: 1050px;
+      width: 98vw;
+      max-height: 95vh;
+      overflow: auto;
+      position: relative;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #certificateModal .close {
+      position: absolute;
+      top: 12px;
+      right: 24px;
+      color: #003366;
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    #certificateModal .close:hover {
+      background: #e6f0fa;
+    }
+    #certificateIframe {
+      width: 1000px;
+      height: 700px;
+      border: none;
+      border-radius: 12px;
+      background: #fff;
+      margin: 0 auto;
+      display: block;
+      max-width: 98vw;
+      max-height: 80vh;
+    }
+
+    /* Progress Bar Styles */
+    .progress-bar-outer { display:inline-block; vertical-align:middle; width:120px; height:12px; background:#e0f7fa; border-radius:8px; margin-left:12px; }
+    .progress-bar-inner { height:100%; background:#36a2eb; border-radius:8px; transition:width 0.4s cubic-bezier(.68,-0.55,.27,1.55); }
+  </style>
+</head>
+<body>
+  <div class="header-outer">
+    <header>
+      <div class="header-left">
+        <img src="mvgr2.jpeg" alt="Logo Left" class="header-logo">
+        <div class="header-title">Cyber Safety Quiz</div>
+        <img src="mvgr1.jpeg" alt="Logo Right" class="header-logo">
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="quiz.html" class="nav-btn active">Quiz</a>
+        <a href="tips.html">Tips</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <div class="quiz-content">
+      <div id="quizContainer"></div>
+      <div class="result" id="result" style="display:none;"></div>
+    </div>
+    
+    <div class="question-nav">
+      <h3>Question Navigator</h3>
+      <div class="nav-grid" id="navGrid"></div>
+      <div class="nav-controls">
+        <button class="nav-btn-small" onclick="goToFirstUnanswered()">First Unanswered</button>
+        <button class="nav-btn-small" onclick="goToFirstFlagged()">First Flagged</button>
+        <button class="nav-btn-small" onclick="showAllFlagged()">Show Flagged</button>
+        <button class="nav-btn-small" onclick="clearAllFlags()">Clear Flags</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Test your cyber safety knowledge!</p>
+  </footer>
+
+  <canvas id="confetti-canvas" style="position:fixed; pointer-events:none; left:0; top:0; width:100vw; height:100vh; z-index:2000;"></canvas>
+  <script>
+    const questions = [
+      { q: "What should you do if you get a message from a stranger online?", a: ["Ignore it", "Reply politely", "Share your details", "Block a friend"], correct: 0 },
+      { q: "What makes a strong password?", a: ["Your name", "12345", "Mix of letters, numbers & symbols", "Your school name"], correct: 2 },
+      { q: "Who should you talk to if you're being bullied online?", a: ["No one", "A trusted adult", "Your bully", "Everyone on social media"], correct: 1 },
+      { q: "What is cyberbullying?", a: ["Telling jokes", "Online kindness", "Hurting someone online", "Playing games online"], correct: 2 },
+      { q: "Which one is a safe online habit?", a: ["Clicking unknown links", "Using strong passwords", "Sharing your address", "Posting private photos"], correct: 1 },
+      { q: "What is phishing?", a: ["A type of fish", "Online shopping", "A scam to steal info", "A new app"], correct: 2 },
+      { q: "Should you update your devices regularly?", a: ["No", "Only once", "Yes", "Never"], correct: 2 },
+      { q: "What info should you keep private online?", a: ["Your favorite color", "Your full name and address", "Your pet's name", "Your hobbies"], correct: 1 },
+      { q: "Is it okay to meet online friends in real life without permission?", a: ["Yes", "No", "Only if you're excited", "If they promise gifts"], correct: 1 },
+      { q: "What does malware do?", a: ["Helps you study", "Protects your phone", "Harms your device", "Saves battery"], correct: 2 },
+      { q: "Why should you log out of public computers?", a: ["To confuse others", "To save power", "To keep your info safe", "So it shuts down"], correct: 2 },
+      { q: "Should you open email attachments from unknown senders?", a: ["Yes", "No", "Only if they say it's urgent", "Sometimes"], correct: 1 },
+      { q: "How often should you change your passwords?", a: ["Every day", "Once a year", "Never", "Regularly"], correct: 3 },
+      { q: "What is two-factor authentication?", a: ["A game", "A type of virus", "Extra layer of security", "Your email password"], correct: 2 },
+      { q: "Which device can get hacked?", a: ["Only computers", "Only phones", "Any connected device", "TV only"], correct: 2 },
+      { q: "What is digital footprint?", a: ["Footprints on your keyboard", "Your online activity record", "Password list", "Data backup"], correct: 1 },
+      { q: "Who should know your password?", a: ["Everyone", "Your best friend", "Only you", "Your entire class"], correct: 2 },
+      { q: "Why is cyber safety important?", a: ["To get more likes", "To stay safe online", "To use cool filters", "To win games"], correct: 1 },
+      { q: "What is a scam?", a: ["A gift", "A real offer", "A trick to steal info or money", "A game"], correct: 2 },
+      { q: "What should you do if you feel uncomfortable online?", a: ["Keep quiet", "Tell a trusted adult", "Ignore it", "Reply rudely"], correct: 1 }
+    ];
+
+    // Shuffle questions array using Fisher-Yates algorithm
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    shuffle(questions);
+
+    let current = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let feedbacks = Array(questions.length).fill(null);
+    let visited = Array(questions.length).fill(false);
+    let flagged = Array(questions.length).fill(false);
+    let score = 0;
+
+    // Confetti Animation
+    function confettiBurst(duration = 900, count = 60) {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W = window.innerWidth, H = window.innerHeight;
+      canvas.width = W; canvas.height = H;
+      const confetti = [];
+      const colors = ['#0066cc','#28a745','#ffce00','#ff6384','#36a2eb','#ff9f40'];
+      for (let i = 0; i < count; i++) {
+        confetti.push({
+          x: Math.random() * W,
+          y: Math.random() * -H/2,
+          r: 6 + Math.random() * 8,
+          d: Math.random() * count,
+          color: colors[Math.floor(Math.random()*colors.length)],
+          tilt: Math.random() * 10 - 10,
+          tiltAngle: 0,
+          tiltAngleIncremental: (Math.random() * 0.07) + 0.05
+        });
+      }
+      let angle = 0;
+      let frame = 0;
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        angle += 0.01;
+        for (let i = 0; i < count; i++) {
+          let c = confetti[i];
+          c.y += (Math.cos(angle + c.d) + 2 + c.r/6) * 0.9;
+          c.x += Math.sin(angle);
+          c.tiltAngle += c.tiltAngleIncremental;
+          c.tilt = Math.sin(c.tiltAngle) * 15;
+          ctx.beginPath();
+          ctx.lineWidth = c.r;
+          ctx.strokeStyle = c.color;
+          ctx.moveTo(c.x + c.tilt + c.r/3, c.y);
+          ctx.lineTo(c.x + c.tilt, c.y + c.tilt + 10);
+          ctx.stroke();
+        }
+      }
+      function update() {
+        draw();
+        frame++;
+        if (frame < duration/16) {
+          requestAnimationFrame(update);
+        } else {
+          ctx.clearRect(0, 0, W, H);
+        }
+      }
+      update();
+    }
+    window.addEventListener('resize', function() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    });
+
+    function updateNavigation() {
+      const navGrid = document.getElementById('navGrid');
+      navGrid.innerHTML = '';
+      
+      for (let i = 0; i < questions.length; i++) {
+        const navBtn = document.createElement('div');
+        navBtn.className = 'nav-question';
+        navBtn.textContent = i + 1;
+        navBtn.onclick = () => goToQuestion(i);
+        
+        if (i === current) {
+          navBtn.classList.add('current');
+        } else if (flagged[i]) {
+          navBtn.classList.add('flagged');
+        } else if (userAnswers[i] !== null) {
+          navBtn.classList.add('answered');
+        } else if (visited[i]) {
+          navBtn.classList.add('visited');
+        }
+        
+        navGrid.appendChild(navBtn);
+      }
+    }
+
+    function goToQuestion(index) {
+      if (index >= 0 && index < questions.length) {
+        visited[current] = true;
+        current = index;
+        renderQuestion();
+        updateNavigation();
+      }
+    }
+
+    function goToFirstUnanswered() {
+      const firstUnanswered = userAnswers.findIndex(answer => answer === null);
+      if (firstUnanswered !== -1) {
+        goToQuestion(firstUnanswered);
+      } else {
+        alert('All questions have been answered!');
+      }
+    }
+
+    function goToFirstFlagged() {
+      const firstFlagged = flagged.findIndex(flag => flag === true);
+      if (firstFlagged !== -1) {
+        goToQuestion(firstFlagged);
+      } else {
+        alert('No questions are flagged!');
+      }
+    }
+
+    function showAllFlagged() {
+      const flaggedQuestions = flagged.map((flag, index) => flag ? index + 1 : null).filter(q => q !== null);
+      if (flaggedQuestions.length > 0) {
+        alert(`Flagged questions: ${flaggedQuestions.join(', ')}`);
+      } else {
+        alert('No questions are flagged!');
+      }
+    }
+
+    function clearAllFlags() {
+      if (confirm('Are you sure you want to clear all flags?')) {
+        flagged.fill(false);
+        updateNavigation();
+      }
+    }
+
+    function toggleFlag() {
+      flagged[current] = !flagged[current];
+      updateNavigation();
+    }
+
+    function renderQuestion() {
+      const container = document.getElementById('quizContainer');
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'none';
+      
+      // Mark current question as visited
+      visited[current] = true;
+      
+      if (current >= questions.length) {
+        // Show result
+        score = userAnswers.reduce((acc, ans, i) => acc + (ans === questions[i].correct ? 1 : 0), 0);
+        container.innerHTML = '';
+        if (score >= 12) {
+          resultDiv.innerHTML = `<span class='pass'>🎉 Great! You scored ${score}/${questions.length}.<br>Congratulations, you earned a certificate!</span><br><button class="quiz-btn certificate-link" onclick="showCertificate()">View Certificate</button>`;
+          confettiBurst(1500, 120); // Big confetti for pass
+        } else {
+          resultDiv.innerHTML = `<span class='fail'>😟 You scored ${score}/${questions.length}.<br>You have to practice more!</span>`;
+        }
+        resultDiv.style.display = 'block';
+        updateNavigation();
+        return;
+      }
+      
+      const q = questions[current];
+      let html = '';
+      // Progress indicator with bar
+      html += `<div class='progress-indicator'><img src='https://cdn-icons-png.flaticon.com/512/3135/3135768.png' alt='Quiz Icon'> Question ${current + 1} of ${questions.length}` +
+        `<div class='progress-bar-outer'><div class='progress-bar-inner' style='width:${((current+1)/questions.length)*100}%'></div></div></div>`;
+      html += `<div class='question'><h3 style='font-size:2rem; color:#003366; font-weight:bold; margin-bottom:18px;'>${q.q}</h3>`;
+      q.a.forEach((opt, j) => {
+        const checked = userAnswers[current] === j ? 'checked' : '';
+        const disabled = userAnswers[current] !== null ? 'disabled' : '';
+        html += `<label style='font-size:1.15rem; margin-bottom:10px; display:block; cursor:pointer; transition:background 0.2s;'><input type='radio' name='q' value='${j}' ${checked} ${disabled}> ${opt}</label>`;
+      });
+      html += `</div>`;
+      // Feedback
+      if (feedbacks[current]) {
+        const icon = feedbacks[current].type === 'correct'
+          ? `<img src='https://cdn-icons-png.flaticon.com/512/845/845646.png' class='icon' alt='Correct'>`
+          : `<img src='https://cdn-icons-png.flaticon.com/512/463/463612.png' class='icon' alt='Incorrect'>`;
+        html += `<div class='feedback ${feedbacks[current].type}'>${icon}${feedbacks[current].msg}</div>`;
+      }
+      // Navigation
+      html += `<div class='quiz-nav'>`;
+      html += `<button class='quiz-btn' onclick='prevQuestion()' ${current === 0 ? 'disabled' : ''}>Previous Question</button>`;
+      html += `<button class='quiz-btn' onclick='toggleFlag()' style='background: ${flagged[current] ? '#6f42c1' : '#6c757d'};'>${flagged[current] ? '🚩 Unflag' : '🚩 Flag'}</button>`;
+      html += `<button class='quiz-btn' onclick='nextQuestion()' ${userAnswers[current] === null ? 'disabled' : ''}>Next Question</button>`;
+      html += `</div>`;
+      container.innerHTML = html;
+      
+      // Add event listeners
+      document.querySelectorAll("input[name='q']").forEach(input => {
+        input.addEventListener('change', function() {
+          userAnswers[current] = parseInt(this.value);
+          if (userAnswers[current] === q.correct) {
+            feedbacks[current] = { type: 'correct', msg: 'Correct! Well done!' };
+            confettiBurst(700, 40); // Confetti for correct answer
+          } else {
+            feedbacks[current] = { type: 'incorrect', msg: 'Incorrect. The correct answer is: ' + q.a[q.correct] };
+          }
+          // Re-render to update the Next button state
+          renderQuestion();
+        });
+      });
+      
+      updateNavigation();
+    }
+
+    function prevQuestion() {
+      if (current > 0) {
+        visited[current] = true;
+        current--;
+        renderQuestion();
+      }
+    }
+    function nextQuestion() {
+      if (userAnswers[current] !== null) {
+        visited[current] = true;
+        current++;
+        renderQuestion();
+      } else {
+        alert('Please select an answer before proceeding to the next question.');
+      }
+    }
+
+    // Certificate modal logic
+    function showCertificate() {
+      // Prompt for participant name
+      let participantName = prompt('Please enter your name for the certificate:');
+      if (!participantName || participantName.trim() === '') {
+        alert('Name is required to view the certificate.');
+        return;
+      }
+      participantName = encodeURIComponent(participantName.trim());
+      
+      // Create modal if it doesn't exist
+      let cert = document.getElementById('certificateModal');
+      if (!cert) {
+        const modalDiv = document.createElement('div');
+        modalDiv.id = 'certificateModal';
+        modalDiv.innerHTML = `
+          <div class='modal-content'>
+            <span class='close' onclick='closeCertificateModal()'>&times;</span>
+            <iframe id='certificateIframe' src='' title='Certificate'></iframe>
+          </div>
+        `;
+        document.body.appendChild(modalDiv);
+        cert = modalDiv;
+      }
+      
+      const iframe = document.getElementById('certificateIframe');
+      if (iframe) {
+        iframe.src = 'certificate.html?name=' + participantName;
+        cert.style.display = 'flex';
+      }
+    }
+    
+    function closeCertificateModal() {
+      const cert = document.getElementById('certificateModal');
+      const iframe = document.getElementById('certificateIframe');
+      if (cert && iframe) {
+        cert.style.display = 'none';
+        iframe.src = '';
+      }
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const cert = document.getElementById('certificateModal');
+      if (event.target === cert) {
+        closeCertificateModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeCertificateModal();
+      }
+    });
+
+    // Initial render
+    renderQuestion();
+  </script>
+</body>
+</html>

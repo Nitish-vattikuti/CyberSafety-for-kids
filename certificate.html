@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion - Cyber Safety Program</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Pinyon+Script&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .certificate-container {
+            width: 1000px;
+            max-width: 98vw;
+            height: 700px;
+            max-height: 98vh;
+            background-color: #f7f6f1;
+            font-family: 'Merriweather', serif;
+            color: #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .certificate-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 10px solid #c9a96a;
+            padding: 2px;
+            border-image: linear-gradient(to bottom right, #b8860b, #daa520, #b8860b) 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .certificate-inner-border {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #daa520;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: space-between;
+        }
+        .pinyon-script {
+            font-family: 'Pinyon Script', cursive;
+        }
+        .student-name {
+            border: none;
+            border-bottom: 2px dotted #555;
+            background: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+            outline: none;
+        }
+        .student-name:focus {
+            border-bottom: 2px solid #b8860b;
+        }
+        .issued-date-label {
+            margin-top: 24px;
+            font-size: 1.1rem;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+        @media print {
+            body {
+                background-color: #fff;
+            }
+            .print-button-container {
+                display: none;
+            }
+            .certificate-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+            }
+        }
+        @media (max-width: 1100px) {
+            .certificate-container {
+                width: 98vw;
+                height: 98vw;
+                min-height: 400px;
+            }
+        }
+        @media (max-width: 700px) {
+            .certificate-container {
+                width: 100vw;
+                height: auto;
+                min-height: 400px;
+            }
+            .certificate-inner-border {
+                padding: 10px;
+            }
+            .student-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="certificate-container" id="certificate">
+        <div class="certificate-border">
+            <div class="certificate-inner-border">
+                <!-- Header with Logos -->
+                <div class="w-full flex justify-between items-center mb-4">
+                    <img src="mvgr2.jpeg" alt="MVGR College Logo" class="w-28 h-28 object-contain">
+                    <div class="flex-grow">
+                        <h1 class="text-4xl font-bold text-blue-900">Maharaj Vijayaram Gajapathi Raj</h1>
+                        <h2 class="text-2xl text-blue-800">College of Engineering (Autonomous)</h2>
+                    </div>
+                    <img src="mvgr1.jpeg" alt="MANSAS Logo" class="w-28 h-28 object-contain">
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-grow flex flex-col justify-center items-center">
+                    <h3 class="text-5xl font-bold pinyon-script text-yellow-700 mt-4">Certificate of Completion</h3>
+                    
+                    <p class="mt-8 text-xl">This certificate is proudly presented to</p>
+
+                    <input 
+                        type="text" 
+                        class="pinyon-script text-blue-900 student-name mt-4" 
+                        value=""
+                        id="studentName"
+                        readonly
+                    >
+
+                    <p class="mt-6 text-xl max-w-2xl">
+                        for the successful completion of the
+                        <span class="font-bold text-2xl text-blue-900">Cyber Safety Awareness Program</span>
+                        conducted by the Department of Computer Science & Engineering.
+                    </p>
+
+                    <div class="w-full flex flex-col items-center mt-16 pt-8">
+                      <div class="w-full flex justify-between">
+                        <div class="text-center w-1/2">
+                            <p class="pinyon-script text-3xl">Dr B. Aruna Kumari</p>
+                            <hr class="w-3/4 mx-auto mt-1 border-gray-600">
+                            <p class="mt-1 font-semibold">HOD, CSE Department</p>
+                        </div>
+                        <div class="text-center w-1/2">
+                            <p class="pinyon-script text-3xl">Dr. Y M C Sekhar</p>
+                            <hr class="w-3/4 mx-auto mt-1 border-gray-600">
+                            <p class="mt-1 font-semibold">Principal</p>
+                        </div>
+                      </div>
+                      <p class="issued-date-label">Issued on: <span id="issuedDate"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-button-container mt-8 text-center">
+        <button onclick="window.print()" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300">
+            Print Certificate
+        </button>
+    </div>
+
+    <script>
+      // Get participant name from query string and set it
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+      const studentNameInput = document.getElementById('studentName');
+      const participantName = getQueryParam('name');
+      if (participantName) {
+        studentNameInput.value = decodeURIComponent(participantName);
+      } else {
+        studentNameInput.value = "Participant Name";
+      }
+      // Set issued date to today
+      function formatDate(date) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString(undefined, options);
+      }
+      document.getElementById('issuedDate').textContent = formatDate(new Date());
+    </script>
+
+</body>
+</html>

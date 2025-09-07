@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Safety Tips</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header-outer {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    header {
+      background-color: #0066cc;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-radius: 20px;
+      border: 4px solid #005bb5;
+      box-sizing: border-box;
+      min-height: 60px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 12px 8px 0 8px;
+      pointer-events: auto;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin: 0 5px;
+      background: white;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .header-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a:not(.nav-btn) {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: color 0.2s, background-color 0.2s;
+      border-radius: 999px;
+    }
+    nav a:not(.nav-btn):hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+    }
+
+    .nav-btn {
+      background: white;
+      color: #0066cc !important;
+      border-radius: 999px;
+      padding: 8px 28px;
+      margin: 0 2px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      border: none;
+      outline: none;
+      display: inline-block;
+    }
+    .nav-btn.active {
+      background: white;
+      color: #0066cc !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .nav-btn:hover, .nav-btn:focus {
+      background: #e6f0fa;
+      color: #003366 !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      padding: 0 20px 20px 20px;
+    }
+
+    section {
+      background-color: white;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #003366;
+      margin-bottom: 15px;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .tip-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: #0066cc;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    section[style*='background:linear-gradient'] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg,#e0f7fa 0%,#f0f8ff 100%);
+      border-radius: 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+      margin: 80px 0 8px 0 !important;
+      padding: 36px 18px 24px 18px !important;
+    }
+
+    @media (max-width: 768px) {
+      .header-outer {
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 2vw;
+        border-radius: 14px;
+        min-height: 70px;
+        gap: 12px;
+        margin: 8px 2vw 0 2vw;
+      }
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 8px;
+      }
+      .header-title {
+        font-size: 1rem;
+      }
+      section[style*='background:linear-gradient'] {
+        margin: 70px 0 6px 0 !important;
+      }
+      main {
+        padding: 0 5vw 20px 5vw;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        margin: 4px 1vw 0 1vw;
+        min-height: 60px;
+        padding: 8px 1vw;
+      }
+      .header-title {
+        font-size: 0.9rem;
+      }
+      .header-logo {
+        width: 36px;
+        height: 36px;
+      }
+      .nav-btn {
+        font-size: 0.9rem;
+        padding: 6px 14px;
+      }
+      section[style*='background:linear-gradient'] {
+        margin: 60px 0 4px 0 !important;
+        padding: 18px 4vw 10px 4vw !important;
+      }
+      main {
+        padding: 0 2vw 10px 2vw;
+      }
+    }
+
+    /* --- HERO/BANNER SECTION --- */
+    .tips-hero-section {
+      width: 100%;
+      min-height: 260px;
+      background: linear-gradient(120deg,#e0f7fa 0%,#f0f8ff 100%);
+      border-radius: 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+      margin: 80px 0 8px 0;
+      padding: 36px 18px 24px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      animation: heroFadeIn 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes heroFadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .tips-hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1100px;
+      flex-wrap: wrap;
+    }
+    .tips-hero-visual {
+      position: relative;
+      flex: 1 1 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      z-index: 1;
+    }
+    .tips-hero-illustration {
+      width: 120px;
+      height: 120px;
+      z-index: 2;
+      position: relative;
+      animation: heroBounce 2.5s infinite;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      border-radius: 50%;
+      background: #fff;
+      padding: 10px;
+    }
+    @keyframes heroBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+    .tips-hero-bg-shape {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 60% 40%, #b3e5fc 60%, #e0f7fa 100%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1.1);
+      z-index: 0;
+      filter: blur(2px);
+      opacity: 0.7;
+      animation: heroShapePulse 3s infinite alternate;
+    }
+    @keyframes heroShapePulse {
+      0% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.9; }
+    }
+    .tips-hero-text {
+      flex: 2 1 340px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 2;
+    }
+    .tips-hero-title {
+      font-size: 2.4rem;
+      color: #003366;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-align: left;
+      line-height: 1.1;
+    }
+    .tips-hero-title .highlight {
+      color: #0066cc;
+      background: #e6f0fa;
+      border-radius: 8px;
+      padding: 0 8px;
+      box-shadow: 0 2px 8px rgba(0,102,204,0.08);
+      display: inline-block;
+      font-size: 1.1em;
+    }
+    .tips-hero-desc {
+      font-size: 1.15rem;
+      color: #005bb5;
+      margin-bottom: 18px;
+      text-align: left;
+      max-width: 500px;
+    }
+    .tips-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      background: #0066cc;
+      color: #fff !important;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 999px;
+      padding: 12px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      text-decoration: none !important;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      cursor: pointer;
+      margin-top: 4px;
+      gap: 10px;
+      border: none;
+    }
+    .tips-hero-cta:hover, .tips-hero-cta:focus {
+      background: #003366;
+      color: #fff !important;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.13);
+    }
+    .tips-hero-cta .arrow {
+      font-size: 1.5rem;
+      margin-left: 4px;
+      animation: arrowBounce 1.2s infinite;
+    }
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    @media (max-width: 900px) {
+      .tips-hero-content {
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+      }
+      .tips-hero-text {
+        align-items: center;
+        text-align: center;
+      }
+      .tips-hero-title, .tips-hero-desc {
+        text-align: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .tips-hero-section {
+        margin: 60px 0 4px 0;
+        padding: 18px 4vw 10px 4vw;
+      }
+      .tips-hero-title {
+        font-size: 1.3rem;
+      }
+      .tips-hero-illustration {
+        width: 80px;
+        height: 80px;
+      }
+      .tips-hero-bg-shape {
+        width: 110px;
+        height: 110px;
+      }
+    }
+    /* --- TIPS CARDS ANIMATION --- */
+    .tips-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .tips-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 32px 28px;
+      max-width: 400px;
+      min-width: 220px;
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+      animation: cardPopIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+      animation-fill-mode: backwards;
+    }
+    .tips-card:hover {
+      box-shadow: 0 6px 24px rgba(0,102,204,0.13);
+      background: #e6f0fa;
+      transform: translateY(-6px) scale(1.03);
+    }
+    @keyframes cardPopIn {
+      0% { opacity: 0; transform: scale(0.95) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-outer">
+    <header>
+      <div class="header-left">
+        <img src="mvgr2.jpeg" alt="Logo Left" class="header-logo">
+        <div class="header-title">Cyber Safety Tips</div>
+        <img src="mvgr1.jpeg" alt="Logo Right" class="header-logo">
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tips.html" class="nav-btn active">Tips</a>
+      </nav>
+    </header>
+  </div>
+
+  <section class="tips-hero-section">
+    <div class="tips-hero-content">
+      <div class="tips-hero-visual">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Tips Icon" class="tips-hero-illustration">
+        <div class="tips-hero-bg-shape"></div>
+      </div>
+      <div class="tips-hero-text">
+        <h1 class="tips-hero-title">Quick <span class="highlight">Cyber Safety</span> Tips!</h1>
+        <p class="tips-hero-desc">Stay smart and safe online with these easy-to-follow tips. Click each card to learn more and become a cyber safety star!</p>
+        <a href="#" class="tips-hero-cta" onclick="window.scrollTo({top: document.querySelector('main').offsetTop - 20, behavior: 'smooth'}); return false;">
+          <span>Scroll Down to See Tips</span>
+          <span class="arrow">↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="tips-cards">
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2889/2889676.png" alt="Password Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Use Strong Passwords</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Always create passwords with a mix of letters, numbers, and symbols. Avoid using names or birthdays.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Stranger Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Don't Talk to Strangers Online</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Never chat or share personal info with people you don't know in real life.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Update Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Keep Your Devices Updated</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Regular updates help protect your devices from harmful software and hackers.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="Click Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Be Careful What You Click</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Don't click on pop-ups or links in emails from unknown sources. They might contain viruses.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Logout Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Log Out of Accounts</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Always log out of your accounts on shared or public computers to stay safe.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" alt="Privacy Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Keep Your Info Private</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Never share your address, phone number, or school name on public websites or with strangers online.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Report Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Report Suspicious Activity</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">If you see something strange or feel uncomfortable online, tell a trusted adult or teacher right away.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828972.png" alt="Download Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Be Careful with Downloads</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Only download apps, games, or files from trusted sources to avoid viruses and malware.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135792.png" alt="Kindness Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Be Kind Online</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Treat others with respect and kindness on the internet, just like you would in real life.</p>
+      </section>
+      <section class="tips-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135796.png" alt="Time Icon" style="width:56px; height:56px; margin-bottom:12px;">
+        <h2 style="color:#0066cc; font-size:1.2rem; font-weight:bold; margin-bottom:10px; text-align:center;">Balance Your Screen Time</h2>
+        <p style="color:#003366; font-size:1.05rem; text-align:center;">Take breaks and spend time offline with friends, family, and hobbies for a healthy balance.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>Stay safe and smart on the internet!</p>
+  </footer>
+
+  <!-- Confetti Animation -->
+  <canvas id="confetti-canvas" style="position:fixed; pointer-events:none; left:0; top:0; width:100vw; height:100vh; z-index:2000;"></canvas>
+  <script>
+    // Simple Confetti Animation
+    function confettiBurst() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      let W = window.innerWidth, H = window.innerHeight;
+      canvas.width = W; canvas.height = H;
+      const confettiCount = 120;
+      const confetti = [];
+      const colors = ['#0066cc','#28a745','#ffce00','#ff6384','#36a2eb','#ff9f40'];
+      for (let i = 0; i < confettiCount; i++) {
+        confetti.push({
+          x: Math.random() * W,
+          y: Math.random() * -H/2,
+          r: 6 + Math.random() * 8,
+          d: Math.random() * confettiCount,
+          color: colors[Math.floor(Math.random()*colors.length)],
+          tilt: Math.random() * 10 - 10,
+          tiltAngle: 0,
+          tiltAngleIncremental: (Math.random() * 0.07) + 0.05
+        });
+      }
+      let angle = 0;
+      let frame = 0;
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        angle += 0.01;
+        for (let i = 0; i < confettiCount; i++) {
+          let c = confetti[i];
+          c.y += (Math.cos(angle + c.d) + 2 + c.r/6) * 0.9;
+          c.x += Math.sin(angle);
+          c.tiltAngle += c.tiltAngleIncremental;
+          c.tilt = Math.sin(c.tiltAngle) * 15;
+          ctx.beginPath();
+          ctx.lineWidth = c.r;
+          ctx.strokeStyle = c.color;
+          ctx.moveTo(c.x + c.tilt + c.r/3, c.y);
+          ctx.lineTo(c.x + c.tilt, c.y + c.tilt + 10);
+          ctx.stroke();
+        }
+      }
+      function update() {
+        draw();
+        frame++;
+        if (frame < 90) {
+          requestAnimationFrame(update);
+        } else {
+          ctx.clearRect(0, 0, W, H);
+        }
+      }
+      update();
+    }
+    window.addEventListener('DOMContentLoaded', confettiBurst);
+    window.addEventListener('resize', function() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    });
+  </script>
+</body>
+</html>

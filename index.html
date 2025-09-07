@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Safety for Schools</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header-outer {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    header {
+      background-color: #0066cc;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-radius: 20px;
+      border: 4px solid #005bb5;
+      box-sizing: border-box;
+      min-height: 60px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 12px 8px 0 8px;
+      pointer-events: auto;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin: 0 5px;
+      background: white;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .header-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a:not(.nav-btn) {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: color 0.2s, background-color 0.2s;
+      border-radius: 999px;
+    }
+    nav a:not(.nav-btn):hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+    }
+
+    .nav-btn {
+      background: white;
+      color: #0066cc !important;
+      border-radius: 999px;
+      padding: 8px 28px;
+      margin: 0 2px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      border: none;
+      outline: none;
+      display: inline-block;
+      text-decoration: none !important;
+    }
+    .nav-btn.active {
+      background: white;
+      color: #0066cc !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .nav-btn:hover, .nav-btn:focus {
+      background: #e6f0fa;
+      color: #003366 !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      padding: 120px 20px 20px 20px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #0066cc;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .header-outer {
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 2vw;
+        border-radius: 14px;
+        min-height: 70px;
+        gap: 12px;
+        margin: 8px 2vw 0 2vw;
+      }
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 8px;
+      }
+      .header-title {
+        font-size: 1rem;
+      }
+      main {
+        padding: 110px 5vw 20px 5vw;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        margin: 4px 1vw 0 1vw;
+        min-height: 60px;
+        padding: 8px 1vw;
+      }
+      .header-title {
+        font-size: 0.9rem;
+      }
+      .header-logo {
+        width: 36px;
+        height: 36px;
+      }
+      .nav-btn {
+        font-size: 0.9rem;
+        padding: 6px 14px;
+      }
+      main {
+        padding: 140px 2vw 10px 2vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-outer">
+    <header>
+      <div class="header-left">
+        <img src="mvgr2.jpeg" alt="Logo Left" class="header-logo">
+        <div class="header-title">Cyber Safety Awareness</div>
+        <img src="mvgr1.jpeg" alt="Logo Right" class="header-logo">
+      </div>
+      <nav>
+        <a href="index.html" class="nav-btn active">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tips.html">Tips</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <section class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; background: linear-gradient(120deg, #e0f7fa 0%, #f0f8ff 100%); border-radius: 24px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); margin-bottom: 40px;">
+      <img src="CST.webp" alt="Cyber Safety Banner" style="max-width: 340px; width: 90vw; height: auto; border-radius: 18px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); margin-bottom: 24px;">
+      <h1 style="font-size: 2.6rem; color: #003366; font-weight: bold; margin-bottom: 12px; text-align: center;">Welcome to Cyber Safety Awareness!</h1>
+      <p style="font-size: 1.3rem; color: #005bb5; margin-bottom: 18px; text-align: center; max-width: 600px;">Empowering students to stay safe, smart, and confident online. Explore, learn, and test your knowledge with fun activities and tips!</p>
+      <a href="learn.html" class="nav-btn" style="font-size: 1.2rem; padding: 14px 40px; margin-top: 10px; background: #0066cc; color: #fff !important; border-radius: 999px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); font-weight: bold; transition: background 0.2s; text-decoration: none !important;">Start Learning</a>
+    </section>
+
+    <section class="features" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 40px;">
+      <div style="background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 28px; max-width: 320px; min-width: 240px; display: flex; flex-direction: column; align-items: center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Learn Icon" style="width: 64px; height: 64px; margin-bottom: 16px;">
+        <h3 style="color: #0066cc; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px;">Learn</h3>
+        <p style="color: #003366; font-size: 1rem; margin-bottom: 18px; text-align: center;">Discover the basics of cyber safety, privacy, and digital citizenship with easy-to-understand lessons.</p>
+        <a href="learn.html" class="nav-btn" style="padding: 8px 28px; font-size: 1rem; text-decoration: none !important;">Go to Learn</a>
+      </div>
+      <div style="background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 28px; max-width: 320px; min-width: 240px; display: flex; flex-direction: column; align-items: center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Quiz Icon" style="width: 64px; height: 64px; margin-bottom: 16px;">
+        <h3 style="color: #0066cc; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px;">Quiz</h3>
+        <p style="color: #003366; font-size: 1rem; margin-bottom: 18px; text-align: center;">Test your cyber safety knowledge with interactive questions and earn a certificate!</p>
+        <a href="quiz.html" class="nav-btn" style="padding: 8px 28px; font-size: 1rem; text-decoration: none !important;">Take the Quiz</a>
+      </div>
+      <div style="background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 28px; max-width: 320px; min-width: 240px; display: flex; flex-direction: column; align-items: center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Tips Icon" style="width: 64px; height: 64px; margin-bottom: 16px;">
+        <h3 style="color: #0066cc; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px;">Tips</h3>
+        <p style="color: #003366; font-size: 1rem; margin-bottom: 18px; text-align: center;">Get practical tips and tricks to stay safe and secure while using the internet every day.</p>
+        <a href="tips.html" class="nav-btn" style="padding: 8px 28px; font-size: 1rem; text-decoration: none !important;">See Tips</a>
+      </div>
+    </section>
+
+    <!-- Universal Image Zoom Modal -->
+    <div id="imgZoomModal" style="display:none; position:fixed; z-index:5000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+      <div id="imgZoomContent" style="position:relative; background:#fff; border-radius:16px; box-shadow:0 4px 32px rgba(0,0,0,0.25); max-width:98vw; max-height:95vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0;">
+        <span id="imgZoomClose" style="position:absolute; top:12px; right:24px; color:#003366; font-size:2.5rem; font-weight:bold; cursor:pointer; z-index:10; background:rgba(255,255,255,0.7); border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; transition:background 0.2s;">&times;</span>
+        <div style="display:flex; gap:10px; position:absolute; top:12px; left:24px; z-index:10;">
+          <button id="imgZoomOut" style="background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; font-weight:bold; cursor:pointer;">-</button>
+          <button id="imgZoomIn" style="background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; font-weight:bold; cursor:pointer;">+</button>
+        </div>
+        <div id="imgZoomWrapper" style="overflow:auto; max-width:98vw; max-height:80vh; display:flex; align-items:center; justify-content:center;">
+          <img id="imgZoomTarget" src="" alt="Zoomed Image" style="max-width:100%; max-height:80vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.15); transition:transform 0.3s; cursor:grab;" draggable="false">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ for School Safety</p>
+  </footer>
+
+  <script>
+    // Universal Image Zoom Modal Logic
+    let zoomLevel = 1;
+    let isDragging = false, dragStartX = 0, dragStartY = 0, imgStartLeft = 0, imgStartTop = 0;
+    const modal = document.getElementById('imgZoomModal');
+    const modalImg = document.getElementById('imgZoomTarget');
+    const zoomInBtn = document.getElementById('imgZoomIn');
+    const zoomOutBtn = document.getElementById('imgZoomOut');
+    const closeBtn = document.getElementById('imgZoomClose');
+    const wrapper = document.getElementById('imgZoomWrapper');
+
+    function openImgZoom(src, alt) {
+      zoomLevel = 1;
+      modalImg.src = src;
+      modalImg.alt = alt || '';
+      modalImg.style.transform = 'scale(1)';
+      modal.style.display = 'flex';
+      wrapper.scrollTop = 0;
+      wrapper.scrollLeft = 0;
+    }
+    function closeImgZoom() {
+      modal.style.display = 'none';
+      modalImg.src = '';
+    }
+    zoomInBtn.onclick = function() {
+      zoomLevel = Math.min(zoomLevel + 0.2, 5);
+      modalImg.style.transform = `scale(${zoomLevel})`;
+    };
+    zoomOutBtn.onclick = function() {
+      zoomLevel = Math.max(zoomLevel - 0.2, 0.2);
+      modalImg.style.transform = `scale(${zoomLevel})`;
+    };
+    closeBtn.onclick = closeImgZoom;
+    modal.onclick = function(e) { if (e.target === modal) closeImgZoom(); };
+
+    // Drag to scroll
+    modalImg.onmousedown = function(e) {
+      isDragging = true;
+      wrapper.style.cursor = 'grabbing';
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      imgStartLeft = wrapper.scrollLeft;
+      imgStartTop = wrapper.scrollTop;
+      e.preventDefault();
+    };
+    document.onmousemove = function(e) {
+      if (isDragging) {
+        wrapper.scrollLeft = imgStartLeft - (e.clientX - dragStartX);
+        wrapper.scrollTop = imgStartTop - (e.clientY - dragStartY);
+      }
+    };
+    document.onmouseup = function() {
+      isDragging = false;
+      wrapper.style.cursor = 'grab';
+    };
+
+    // Keyboard zoom
+    document.addEventListener('keydown', function(e) {
+      if (modal.style.display === 'flex') {
+        if (e.key === '+' || e.key === '=') { zoomInBtn.click(); }
+        if (e.key === '-') { zoomOutBtn.click(); }
+        if (e.key === 'Escape') { closeImgZoom(); }
+      }
+    });
+
+    // Attach to all images
+    function makeImagesZoomable() {
+      document.querySelectorAll('img').forEach(img => {
+        if (!img.classList.contains('no-zoom')) {
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', function(e) {
+            openImgZoom(img.src, img.alt);
+          });
+        }
+      });
+    }
+    makeImagesZoomable();
+  </script>
+</body>
+</html>
